@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Adviser extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'dni',
+        'full_name',
+        'faculty',
+        'email',
+        'orcid',
+    ];
 }

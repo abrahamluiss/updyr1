@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $authors = Author::orderByDesc('id')->paginate(5);
+        return view('author.index', compact('authors'));
     }
 
     /**
@@ -25,7 +22,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('author.create');
     }
 
     /**
@@ -34,9 +31,24 @@ class AuthorController extends Controller
      * @param  \App\Http\Requests\StoreAuthorRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $rules =[
+            'dni' => 'required|min:3',
+        ];
+
+        $this->validate($request, $rules);
+        $author = new Author();
+        $author->dni = $request->input('dni');
+        $author->full_name = $request->input('fullName');
+        $author->n_boucher = $request->input('n_boucher');
+        $author->amount_paid = $request->input('amount_paid');
+        $author->program = $request->input('program');
+        $author->save();
+
+        $notification = 'Author registrado correctamente';
+        return redirect('author')->with(compact('notification'));
     }
 
     /**
@@ -58,7 +70,8 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+
+        return view('author.edit', compact('author'));
     }
 
     /**
@@ -81,6 +94,10 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $authorTitle = $author->tile;
+        $author->delete();
+
+        $notification = "El autor $authorTitle se elimino correctamente.";
+        return redirect('author')->with(compact('notification'));
     }
 }
