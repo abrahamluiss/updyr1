@@ -6,6 +6,8 @@ use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use \Barryvdh\DomPDF\Facade\Pdf  as PDF;
+use Carbon\Carbon;
 
 class AuthorController extends Controller
 {
@@ -99,5 +101,35 @@ class AuthorController extends Controller
 
         $notification = "El autor $authorTitle se elimino correctamente.";
         return redirect('author')->with(compact('notification'));
+    }
+    public function report(Request $request)
+    {
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        $authors = Author::whereBetween('created_at',
+        [
+            $startDate.$this->ceroTime(),
+            $endDate.$this->midNightTime()
+        ])->get();
+             view()->share('authors', $authors);
+                    if($request->has('download')){
+                        PDF::setOptions(['dpi' => '150','defaultFont' => 'sans-serif']);
+                        $pdf = PDF::loadView('author.pdf');
+                        $pdf->setPaper('a4', 'landscape');
+                        return $pdf->download('autores.pdf');
+                    }
+                    return view('author.pdf');
+    }
+    private function convertCarbon($date){
+        $carbonDateTime = new Carbon($date);
+        $carbonDateTime->format('Y-m-d');
+        return $carbonDateTime;
+    }
+    private function ceroTime(){
+        return " 00:00:00";
+    }
+    private function midNightTime(){
+        return " 23:59:59";
     }
 }

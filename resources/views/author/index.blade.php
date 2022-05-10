@@ -17,48 +17,53 @@
                 <a href="{{ route('author.create') }}" class="btn btn-sm btn-success">Nuevo</a>
 
             </nav>
+            <form action="{{ route('author.report', ['download' => 'pdf']) }}" method="post">
+                @csrf
+                @method('POST')
             <div class="form-control">
-                <div class="input-daterange datepicker row align-items-center" data-date-format="yyyy-mm-dd">
 
-                    <div class="col">
-                        <div class="form-group">
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                    <div class="input-daterange datepicker row align-items-center" data-date-format="yyyy-mm-dd">
+
+
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Fecha de inicio" type="text"
+                                        value="{{ date('Y-m-d') }}" id="startDate" name="startDate">
                                 </div>
-                                <input class="form-control" placeholder="Fecha de inicio" type="text"
-                                    value="{{ date('Y-m-d') }}" id="startDateDate" name="startDateDate">
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <div class="input-group input-group-alternative">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="Fecha de fin" type="text"
+                                        value="{{ date('Y-m-d', strtotime(date('Y-m-d'))) }}" id="endDate"
+                                        name="endDate">
                                 </div>
-                                <input class="form-control" placeholder="Fecha de fin" type="text"
-                                    value="{{ date('Y-m-d', strtotime(date('Y-m-d'))) }}" id="endDateDate"
-                                    name="endDateDate">
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
+                        <div class="col">
+                            <div class="form-group">
 
-                            <button type="submit" class="btn-icon-clipboard" title="Descargar">
-                                <div>
-                                    <i class="ni ni-cloud-download-95"></i>
-                                    <span>Descargar</span>
-                                </div>
-                            </button>
+                                <button type="submit" class="btn-icon-clipboard" title="Descargar">
+                                    <div>
+                                        <i class="ni ni-cloud-download-95"></i>
+                                        <span>Descargar</span>
+                                    </div>
+                                </button>
 
+                            </div>
                         </div>
+
                     </div>
-
-
                 </div>
-            </div>
+            </form>
             <div class="card-body">
                 @if (session('notification'))
                     <div class="alert alert-success" role="alert">

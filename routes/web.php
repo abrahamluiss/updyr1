@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
     Route::resource('adviser', AdviserController::class);
     Route::resource('author', AuthorController::class);
+    Route::post('report', [AuthorController::class, 'report'])->name('author.report');
     Route::resource('certificate', CertificateController::class);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
