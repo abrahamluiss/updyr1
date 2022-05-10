@@ -105,7 +105,7 @@
 
                                     </form>
                                     <a href="#" class="btn btn-sm btn-primary">
-                                        <i class="material-icons">download</i>
+                                        <i class="ni ni-cloud-download-95"></i>
 
                                     </a>
 

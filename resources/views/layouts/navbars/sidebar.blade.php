@@ -59,7 +59,7 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">
+                    <a class="nav-link" href="{{ route('certificate.index') }}">
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('PANEL') }}
                     </a>
                 </li>
