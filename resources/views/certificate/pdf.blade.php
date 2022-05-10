@@ -19,7 +19,7 @@
     }
     #titleh1{
         font-size: 30px;
-        color: red;
+        color: black;
 
     }
     #p1{
@@ -28,7 +28,7 @@
     }
     #titleDoc{
         font-weight: bold;
-        color: red;
+        color: black;
     }
     #presentado{
         margin-left: 10%;
@@ -37,7 +37,7 @@
     }
     #fullName{
         font-weight: bold;
-        color: red;
+        color: black;
         margin-left: 35%;
         margin-top: -3%;
     }
@@ -46,7 +46,7 @@
         margin-right: 10%;
     }
     #asesor{
-        color: red;
+        color: black;
     }
     #table{
         margin-left: 35%;
@@ -54,13 +54,13 @@
         border-color: black;
     }
     #tr{
-        color: red;
+        color: black;
 
         border: 1px solid;
         border-color: black;
     }
     #td{
-        color: red;
+        color: black;
 
         border: 1px solid;
         border-color: black;
@@ -75,7 +75,7 @@
     #code{
         margin-left: 10%;
         margin-top: 10%;
-        color: red;
+        color: black;
 
     }
 </style>
