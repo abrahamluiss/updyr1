@@ -12,7 +12,7 @@
 <body>
     <header class="header text-center">
         <h1>Autores Registrados</h1>
-        <span></span>
+        <span>Monto Total: {{ $total }}</span>
     </header>
     <table class="table table-bordered text-center">
         <thead>
@@ -42,13 +42,13 @@
 
                 {{ $i=1; }}
             @endphp
-            @while ($i<=count($authors));
+            {{-- @while ($i<=count($authors)); --}}
 
 
             @foreach ($authors as $author)
 
                     <tr>
-                        <th scope="row">{{ $i++ }}</th>
+                        <th scope="row">{{ $author->id }}</th>
                         <td class="text-center">
                             {{ $author->full_name }}
                         </td>
@@ -68,7 +68,7 @@
 
 
                 @endforeach
-                @endwhile
+                {{-- @endwhile --}}
         </tbody>
     </table>
 </body>

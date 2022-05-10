@@ -112,7 +112,16 @@ class AuthorController extends Controller
             $startDate.$this->ceroTime(),
             $endDate.$this->midNightTime()
         ])->get();
-             view()->share('authors', $authors);
+        $total= Author::whereBetween('created_at',
+        [
+            $startDate.$this->ceroTime(),
+            $endDate.$this->midNightTime()
+        ])->sum('amount_paid');
+        $data = array(
+            'authors' => $authors,
+            'total' => $total,
+        );
+             view()->share(['authors' => $authors,'total' => $total,]);
                     if($request->has('download')){
                         PDF::setOptions(['dpi' => '150','defaultFont' => 'sans-serif']);
                         $pdf = PDF::loadView('author.pdf');
