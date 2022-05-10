@@ -14,10 +14,17 @@ class AdviserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $advisers = Adviser::orderByDesc('id')->paginate(5);
+        // $advisers = Adviser::orderByDesc('id')->paginate(5);
+        $name  = $request->input('data');
+        $dni = $request->input('data');
 
+        $advisers = Adviser::where('full_name', 'LIKE', '%' . $name . '%')
+            ->orderByDesc('id')
+            ->orWhere('dni', 'LIKE', '%' . $dni . '%')
+            // ->orWhere('fatherLastName', 'LIKE', '%' . $fatherLastName . '%')
+            ->paginate(10);
         return view('adviser.index', compact('advisers'));
     }
 

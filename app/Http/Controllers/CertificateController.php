@@ -16,9 +16,16 @@ class CertificateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $certificates = Certificate::orderByDesc('id')->paginate(5);
+        $name  = $request->input('data');
+        $dni = $request->input('data');
+
+        $certificates = Certificate::where('id', 'LIKE', '%' . $name . '%')
+            ->orderByDesc('id')
+            // ->orWhere('fatherLastName', 'LIKE', '%' . $fatherLastName . '%')
+            ->paginate(3);
+        // $certificates = Certificate::orderByDesc('id')->paginate(5);
         return view('certificate.index', compact('certificates'));
     }
 

@@ -11,9 +11,18 @@ use Carbon\Carbon;
 
 class AuthorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $authors = Author::orderByDesc('id')->paginate(5);
+        // $authors = Author::orderByDesc('id')->paginate(5);
+        $name  = $request->input('data');
+        $dni = $request->input('data');
+
+        $authors = Author::where('full_name', 'LIKE', '%' . $name . '%')
+            ->orderByDesc('id')
+            ->orWhere('dni', 'LIKE', '%' . $dni . '%')
+            // ->orWhere('fatherLastName', 'LIKE', '%' . $fatherLastName . '%')
+            ->paginate(3);
+
         return view('author.index', compact('authors'));
     }
 

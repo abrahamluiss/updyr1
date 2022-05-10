@@ -11,6 +11,11 @@
                     <div class="col">
                         <h3 class="mb-0">{{ __("Certificados") }}</h3>
                     </div>
+                    <form class="form-inline" {{ route('certificate.index') }} method="get">
+                        <input class="form-control mr-sm-2" type="search" name="data" placeholder="Busca por codigo"
+                            aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
                     <div class="col text-right">
                         <a href="{{ route('certificate.create') }}" class="btn btn-sm btn-success">Nuevo</a>
                         {{-- <a href="{{ route('generate-pdf',['download'=>'pdf']) }}" class="btn btn-sm btn-success"> <i class="ni ni-cloud-download-95"></i></a> --}}
