@@ -17,15 +17,15 @@
                 <a href="{{ route('adviser.create') }}" class="btn btn-sm btn-success">Nuevo</a>
 
             </nav>
-            <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                  <label class="custom-file-label" for="inputGroupFile04">Escoger archivos excel</label>
-                </div>
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
-                </div>
-              </div>
+            <div class="form-control">
+                <form class="form-inline" action="{{ route('adviser.import.excel') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+                    <input type="file" name="file">
+                    <button class="btn btn-sm btn-outline-primary">Subir</button>
+
+                </form>
+            </div>
             <div class="card-body">
                 @if (session('notification'))
                     <div class="alert alert-success" role="alert">
@@ -50,6 +50,9 @@
                             </th>
                             <th class="text-center">
                                 Facultad
+                            </th>
+                            <th class="text-center">
+                                Email
                             </th>
                             <th class="text-center">
                                 Orcid
@@ -90,14 +93,11 @@
                                     <form action="{{ route('adviser.destroy', $adviser) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ route('adviser.edit', $adviser) }}" class="btn btn-sm btn-primary">Editar</a>
+                                        <a href="{{ route('adviser.edit', $adviser) }}"
+                                            class="btn btn-sm btn-primary">Editar</a>
                                         {{-- <button type="submit" class="btn btn-sm btn-danger">Eliminar</button> --}}
-                                        <input
-                                        type="submit"
-                                        value="Elminar"
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('¿Desea elimiar..?')"
-                                    >
+                                        <input type="submit" value="Elminar" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('¿Desea elimiar..?')">
 
                                     </form>
 

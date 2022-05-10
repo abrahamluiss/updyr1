@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAdviserRequest;
 use App\Http\Requests\UpdateAdviserRequest;
+use App\Imports\AdvisersImport;
 use App\Models\Adviser;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdviserController extends Controller
 {
@@ -26,6 +28,15 @@ class AdviserController extends Controller
             // ->orWhere('fatherLastName', 'LIKE', '%' . $fatherLastName . '%')
             ->paginate(10);
         return view('adviser.index', compact('advisers'));
+    }
+    public function importAdviser(Request $request)
+    {
+
+        $file = $request->file('file');
+        // dd($file);
+        Excel::import(new AdvisersImport, $file);
+        $notification = 'Archivo importado correctamente';
+        return redirect('adviser')->with(compact('notification'));
     }
 
     /**

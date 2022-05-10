@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
     Route::resource('adviser', AdviserController::class);
+    Route::post('adviserImport', [AdviserController::class, 'importAdviser'])->name('adviser.import.excel');
+
     Route::resource('author', AuthorController::class);
     Route::post('report', [AuthorController::class, 'report'])->name('author.report');
     Route::resource('certificate', CertificateController::class);
