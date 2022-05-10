@@ -135,7 +135,7 @@ class AuthorController extends Controller
                         PDF::setOptions(['dpi' => '150','defaultFont' => 'sans-serif']);
                         $pdf = PDF::loadView('author.pdf');
                         $pdf->setPaper('a4', 'landscape');
-                        return $pdf->download('autores.pdf');
+                        return $pdf->stream('autores.pdf');
                     }
                     return view('author.pdf');
     }

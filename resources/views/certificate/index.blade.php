@@ -109,11 +109,11 @@
                                     >
 
                                     </form>
-                                    <a href="#" class="btn btn-sm btn-primary">
+
+                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}"  class="btn btn-sm btn-primary">
                                         <i class="ni ni-cloud-download-95"></i>
 
                                     </a>
-
                                 </div>
 
                             </td>

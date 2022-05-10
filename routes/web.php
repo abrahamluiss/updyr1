@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('author', AuthorController::class);
     Route::post('report', [AuthorController::class, 'report'])->name('author.report');
     Route::resource('certificate', CertificateController::class);
+    Route::get('reportCertificate', [CertificateController::class, 'reportCertificate'])->name('certificate.report');
+
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 

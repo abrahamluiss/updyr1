@@ -8,6 +8,7 @@ use App\Models\Adviser;
 use App\Models\Author;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use \Barryvdh\DomPDF\Facade\Pdf  as PDF;
 
 class CertificateController extends Controller
 {
@@ -158,5 +159,17 @@ class CertificateController extends Controller
 
         $notification = "El certificado $certificateTitle se elimino correctamente.";
         return redirect('certificate')->with(compact('notification'));
+    }
+    public function reportCertificate(Request $request)
+    {
+        $certificate = Certificate::findOrFail($request->input('certificate'));
+        view()->share(['certificate' => $certificate]);
+        if($request->has('download')){
+            PDF::setOptions(['dpi' => '150','defaultFont' => 'sans-serif']);
+            $pdf = PDF::loadView('certificate.pdf');
+            $pdf->setPaper('a4');
+            return $pdf->stream('certificado.pdf');
+        }
+        return view('certificate.pdf');
     }
 }
