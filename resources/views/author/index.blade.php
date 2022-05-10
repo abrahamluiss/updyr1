@@ -14,7 +14,7 @@
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
 
-                <a href="{{ route('adviser.create') }}" class="btn btn-sm btn-success">Nuevo</a>
+                <a href="{{ route('author.create') }}" class="btn btn-sm btn-success">Nuevo</a>
 
             </nav>
             <div class="form-control">

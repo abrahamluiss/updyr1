@@ -83,12 +83,19 @@
                                 </td>
                                 <td class="text-center">
 
-                                    <div class="dropdown">
+                                    <form action="{{ route('adviser.destroy', $adviser) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('adviser.edit', $adviser) }}" class="btn btn-sm btn-primary">Editar</a>
+                                        {{-- <button type="submit" class="btn btn-sm btn-danger">Eliminar</button> --}}
+                                        <input
+                                        type="submit"
+                                        value="Elminar"
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('¿Desea elimiar..?')"
+                                    >
 
-                                        <a href="#" type="button" class="btn btn-primary">Editar</a>
-                                        <a href="#" type="button" class="btn btn-danger">Eliminar</a>
-
-                                    </div>
+                                    </form>
 
                                 </td>
                             </tr>

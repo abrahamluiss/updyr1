@@ -98,6 +98,10 @@ class AdviserController extends Controller
      */
     public function destroy(Adviser $adviser)
     {
-        //
+        $adviserTitle = $adviser->tile;
+        $adviser->delete();
+
+        $notification = "El asesor $adviserTitle se elimino correctamente.";
+        return redirect('adviser')->with(compact('notification'));
     }
 }
