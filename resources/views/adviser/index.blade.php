@@ -1,30 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.headers.cards')
+    @include('layouts.headers.cards')
 
     <div class="container-fluid mt--7">
 
         <div class="card shadow">
-            <div class="card-header border-0">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h3 class="mb-0">{{ __("Autores") }}</h3>
-                    </div>
-                    <div class="col text-right">
-                        <a href="{{ route('author.create') }}" class="btn btn-sm btn-success">Nuevo</a>
-                        {{-- <a href="{{ route('generate-pdf',['download'=>'pdf']) }}" class="btn btn-sm btn-success"> <i class="ni ni-cloud-download-95"></i></a> --}}
-                    </div>
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <a class="navbar-brand">Asesores</a>
+                <form class="form-inline" {{ route('adviser.index') }} method="get">
+                    <input class="form-control mr-sm-2" type="search" name="data" placeholder="Busca nombre o dni"
+                        aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
 
+                <a href="{{ route('adviser.create') }}" class="btn btn-sm btn-success">Nuevo</a>
 
+            </nav>
+            <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                  <label class="custom-file-label" for="inputGroupFile04">Escoger archivos excel</label>
                 </div>
-            </div>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+                </div>
+              </div>
             <div class="card-body">
                 @if (session('notification'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('notification') }}
-                </div>
-
+                    <div class="alert alert-success" role="alert">
+                        {{ session('notification') }}
+                    </div>
                 @endif
             </div>
 
@@ -55,34 +61,37 @@
                     </thead>
                     <tbody>
                         @foreach ($advisers as $adviser)
-                        <tr>
-                            <td>
-                                {{ $adviser->id }}
-                            </td>
-                            <td>
-                                {{ $adviser->full_name }}
-                            </td>
-                            <td>
-                                {{ $adviser->faculty }}
-                            </td>
-                            <td>
-                                {{ $adviser->email }}
-                            </td>
-                            <td>
-                                {{ $adviser->orcid }}
-                            </td>
-                            <td>
-                                <div class="dropdown">
+                            <tr>
+                                <td class="text-center">
+                                    {{ $adviser->id }}
+                                </td>
+                                <td class="text-center">
 
-                                    <a href="#" type="button"
-                                        class="btn btn-primary">Editar</a>
-                                        <a href="#" type="button"
-                                        class="btn btn-danger">Eliminar</a>
+                                    {{ $adviser->full_name }}
+                                </td>
+                                <td class="text-center">
 
-                                </div>
+                                    {{ $adviser->faculty }}
+                                </td>
+                                <td class="text-center">
 
-                            </td>
-                        </tr>
+                                    {{ $adviser->email }}
+                                </td>
+                                <td class="text-center">
+
+                                    {{ $adviser->orcid }}
+                                </td>
+                                <td class="text-center">
+
+                                    <div class="dropdown">
+
+                                        <a href="#" type="button" class="btn btn-primary">Editar</a>
+                                        <a href="#" type="button" class="btn btn-danger">Eliminar</a>
+
+                                    </div>
+
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
