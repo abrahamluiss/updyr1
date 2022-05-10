@@ -71,6 +71,10 @@
                                 </td>
                                 <td class="text-center">
 
+                                    {{ $adviser->dni }}
+                                </td>
+                                <td class="text-center">
+
                                     {{ $adviser->faculty }}
                                 </td>
                                 <td class="text-center">
