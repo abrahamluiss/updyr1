@@ -139,7 +139,7 @@ class CertificateController extends Controller
 
         if ($certificate) {
 
-            $notification = 'El certificado se ha registrado correctamente!';
+            $notification = 'El certificado se ha actualizado correctamente!';
         } else {
             $notification = 'Ocurrio un problema al registrar el certificado.';
         }
