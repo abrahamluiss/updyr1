@@ -54,32 +54,39 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+
+                        {{ $i=1; }}
+                    @endphp
+                    @while ($i<=count($certificates))
                         @foreach ($certificates as $certificate)
                         <tr>
                             <td class="text-center">
-                                {{ $certificate->id }}
+                                {{ $i++ }}
                             </td>
-                            <td class="text-center">
-                                {{ $certificate->title }}
+                            <td class="text-center" title="{{ $certificate->title }}">
+                                {{ Str::limit( $certificate->title, 10, $end = '...') }}
+
                             </td>
-                            <td class="text-center">
-                                {{ $certificate->authors->full_name }}
+                            <td class="text-center" titl="{{ $certificate->authors->full_name }}">
+                                {{ Str::limit( $certificate->authors->full_name, 10, $end = '...') }}
+
                             </td>
-                            <td class="text-center">
-                                {{ $certificate->advisers->full_name }}
+                            <td class="text-center" title="{{ $certificate->advisers->full_name }}">
+                                {{ Str::limit( $certificate->advisers->full_name, 10, $end = '...') }}
 
                             </td>
                             <td class="text-center">
                                 {{ $certificate->program }}
                             </td>
-                            <td class="text-center">
-                                {{ $certificate->faculty }}
+                            <td class="text-center" title="{{ $certificate->faculty }}">
+                                {{ Str::limit( $certificate->faculty, 10, $end = '...') }}
                             </td>
                             <td class="text-center">
-                                {{ $certificate->originality }}
+                                {{ $certificate->originality }}%
                             </td>
                             <td class="text-center">
-                                {{ $certificate->similitude }}
+                                {{ $certificate->similitude }}%
                             </td>
                             <td class="text-center">
                                 {{ $certificate->date }}
@@ -110,7 +117,7 @@
 
                                     </form>
 
-                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}"  class="btn btn-sm btn-primary">
+                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}"  class="btn btn-sm btn-primary" title="Descargar">
                                         <i class="ni ni-cloud-download-95"></i>
 
                                     </a>
@@ -120,6 +127,7 @@
 
                         </tr>
                         @endforeach
+                    @endwhile
                     </tbody>
                 </table>
                 <div class="card-body">
