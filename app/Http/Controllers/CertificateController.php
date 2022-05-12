@@ -100,6 +100,9 @@ class CertificateController extends Controller
         $certificate->date = $request->input('date');
         $certificate->observation = $request->input('observation');
         $certificate->save();
+
+        $notification = 'EL certificado se ha registrado correctamente';
+        return redirect('certificate')->with(compact('notification'));
     }
 
     /**
