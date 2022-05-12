@@ -28,7 +28,7 @@ class CreateCertificatesTable extends Migration
              $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
 
             //Adviser
-            $table->unsignedBigInteger('adviser_id')->onDelete('cascade')->softDeletes();
+            $table->unsignedBigInteger('adviser_id');
             $table->foreign('adviser_id')->references('id')->on('advisers')->onDelete('cascade');
             $table->timestamps();
         });

@@ -15,6 +15,16 @@
                                 <li class="breadcrumb-item active" aria-current="page">Crear</li>
                             </ol>
                         </nav>
+                        @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <p>Corrige los siguientes errores:</p>
+                            <ul>
+                                @foreach ($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     </div>
                     <div class="col-lg-6 col-5 text-right">
                         <a href="{{ route('certificate.index') }}" class="btn btn-sm btn-neutral">Atras</a>
@@ -51,8 +61,9 @@
 
                         <div class="form-group">
                             <label for="author">Autor</label>
-                            <input list="author" name="author" class="form-control selectpicker"
+                            <input list="author" name="author" id="authore" class="form-control selectpicker"
                                 placeholder="Dni o nombre del autor" autocomplete="off" required>
+                                <input id="authored" type="hidden" name="authored">
                             <datalist id="author">
                                 @foreach ($authors as $author)
                                     <option value="{{ $author->id }}-{{ $author->full_name }}">
@@ -64,8 +75,9 @@
 
                         <div class="form-group">
                             <label for="adviser">Asesor</label>
-                            <input list="adviser" name="adviser" class="form-control selectpicker"
+                            <input list="adviser" name="adviser" id="advisere" class="form-control selectpicker"
                                 placeholder="Dni o nombre del asesor" autocomplete="off" required>
+                                <input id="advisered" type="hidden" name="advisered">
                             <datalist id="adviser">
                                 @foreach ($advisers as $adviser)
                                     <option value="{{ $adviser->id }}-{{ $adviser->full_name }}">
@@ -140,3 +152,21 @@
 
     </div>
 @endsection
+@push('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    $("#authore").bind("keyup keydown change", function(){
+        var value = $(this).val();
+        var justId = value.split("-")
+        $('#authored').val(justId[0]);
+
+    });
+    $("#advisere").bind("keyup keydown change", function(){
+        var value = $(this).val();
+        var justId = value.split("-")
+        $('#advisered').val(justId[0]);
+
+    });
+</script>
+@endpush

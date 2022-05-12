@@ -17,6 +17,7 @@ class Certificate extends Model
         'date',
         // 'code',
         'observation',
+        'second_author_id'
     ];
     public function authors()
     {
@@ -25,5 +26,9 @@ class Certificate extends Model
     public function advisers()
     {
         return $this->belongsTo(Adviser::class,'adviser_id');
+    }
+    public function authorSecond()
+    {
+        return $this->belongsTo(Author::class,'second_author_id');
     }
 }

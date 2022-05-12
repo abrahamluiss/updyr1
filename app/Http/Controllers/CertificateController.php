@@ -9,6 +9,9 @@ use App\Models\Author;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
 use \Barryvdh\DomPDF\Facade\Pdf  as PDF;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
+
 
 class CertificateController extends Controller
 {
@@ -25,7 +28,7 @@ class CertificateController extends Controller
         $certificates = Certificate::where('id', 'LIKE', '%' . $name . '%')
             ->orderByDesc('id')
             // ->orWhere('fatherLastName', 'LIKE', '%' . $fatherLastName . '%')
-            ->paginate(3);
+            ->paginate(10);
         // $certificates = Certificate::orderByDesc('id')->paginate(5);
         return view('certificate.index', compact('certificates'));
     }
@@ -40,7 +43,7 @@ class CertificateController extends Controller
         $authors = Author::get();
         $advisers = Adviser::get();
 
-        return view('certificate.create',compact('authors', 'advisers'));
+        return view('certificate.create', compact('authors', 'advisers'));
     }
 
     /**
@@ -51,20 +54,45 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-        $authorId = $request->input('author');
-        $chain1 = $authorId;
-        $separator1 = "-";
-        $separatedAuthor = explode($separator1, $chain1);
+        $rules = [
+            'title' => 'required|min:3',
+            'faculty' => 'required',
+            'originality' => 'required|numeric',
+            'similitude' => 'required|numeric',
+            'date' => 'date_format:Y-m-d',
+            'author' => 'required',
+            'adviser' => 'required',
+            'authored' => 'required|exists:App\Models\Author,id',
+            'advisered' => 'required|exists:App\Models\Author,id'
+        ];
+        $messages = [
+            'originality.numeric' => 'La originalidad tiene que ser numeros.',
+            'similitude.numeric' => 'La similitud tiene que ser numeros.',
+            'date.date_format' => 'La fecha no esta en el formato correcto.',
+            'authored.required' => 'El autor es requerido',
+            'authored.exists' => 'No se encontro al autor',
+            'advisered.required' => 'El asesor es requerido',
+            'advisered.exists' => 'No se encontro al asesor',
 
-        $advisersId = $request->input('adviser');
-        $chain = $advisersId;
-        $separator = "-";
-        $separatedAdviser = explode($separator, $chain);
+        ];
+        $this->validate($request, $rules, $messages);
+        // $authorId = $request->input('author');
+        // $chain1 = $authorId;
+        // $separator1 = "-";
+        // $separatedAuthor = explode($separator1, $chain1);
+        // $author=(int)$separatedAuthor[0];
+
+        // $advisersId = $request->input('adviser');
+        // $chain = $advisersId;
+        // $separator = "-";
+        // $separatedAdviser = explode($separator, $chain);
+        // $author=(int)$separatedAdviser[0];
+
 
         $certificate = new Certificate();
         $certificate->title = $request->input('title');
-        $certificate->author_id = (int)$separatedAuthor[0];
-        $certificate->adviser_id = (int)$separatedAdviser[0];
+        $certificate->author_id = $request->input('authored');
+        $certificate->adviser_id = $request->input('advisered');
         $certificate->program = $request->input('program');
         $certificate->faculty = $request->input('faculty');
         $certificate->originality = $request->input('originality');
@@ -72,14 +100,6 @@ class CertificateController extends Controller
         $certificate->date = $request->input('date');
         $certificate->observation = $request->input('observation');
         $certificate->save();
-
-        if ($certificate) {
-
-            $notification = 'El certificado se ha registrado correctamente!';
-        } else {
-            $notification = 'Ocurrio un problema al registrar el certificado.';
-        }
-        return redirect('certificate')->with(compact('notification'));
     }
 
     /**
@@ -125,7 +145,7 @@ class CertificateController extends Controller
         $separator = "-";
         $separatedAdviser = explode($separator, $chain);
 
-        $certificate =Certificate::find($certificate->id);
+        $certificate = Certificate::find($certificate->id);
         $certificate->title = $request->input('title');
         $certificate->author_id = (int)$separatedAuthor[0];
         $certificate->adviser_id = (int)$separatedAdviser[0];
@@ -164,8 +184,8 @@ class CertificateController extends Controller
     {
         $certificate = Certificate::findOrFail($request->input('certificate'));
         view()->share(['certificate' => $certificate]);
-        if($request->has('download')){
-            PDF::setOptions(['dpi' => '150','defaultFont' => 'sans-serif']);
+        if ($request->has('download')) {
+            PDF::setOptions(['dpi' => '150', 'defaultFont' => 'sans-serif']);
             $pdf = PDF::loadView('certificate.pdf');
             $pdf->setPaper('a4');
             return $pdf->stream('certificado.pdf');

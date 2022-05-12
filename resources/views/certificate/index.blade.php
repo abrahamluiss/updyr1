@@ -122,6 +122,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="card-body">
+                    {{ $certificates->links('pagination::bootstrap-4') }}
+                </div>
             </div>
 
         </div>
