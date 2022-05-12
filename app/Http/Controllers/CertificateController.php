@@ -63,7 +63,7 @@ class CertificateController extends Controller
             'author' => 'required',
             'adviser' => 'required',
             'authored' => 'required|exists:App\Models\Author,id',
-            'advisered' => 'required|exists:App\Models\Author,id'
+            'advisered' => 'required|exists:App\Models\Adviser,id'
         ];
         $messages = [
             'originality.numeric' => 'La originalidad tiene que ser numeros.',
