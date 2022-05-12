@@ -68,7 +68,7 @@
                                 {{ Str::limit( $certificate->title, 10, $end = '...') }}
 
                             </td>
-                            <td class="text-center" titl="{{ $certificate->authors->full_name }}">
+                            <td class="text-center" title="{{ $certificate->authors->full_name }}">
                                 {{ Str::limit( $certificate->authors->full_name, 10, $end = '...') }}
 
                             </td>
