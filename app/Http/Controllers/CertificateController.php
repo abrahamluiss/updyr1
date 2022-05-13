@@ -63,7 +63,9 @@ class CertificateController extends Controller
             'author' => 'required',
             'adviser' => 'required',
             'authored' => 'required|exists:App\Models\Author,id',
+            'authored2' => 'different:authored',
             'advisered' => 'required|exists:App\Models\Adviser,id'
+
         ];
         $messages = [
             'originality.numeric' => 'La originalidad tiene que ser numeros.',
@@ -71,6 +73,8 @@ class CertificateController extends Controller
             'date.date_format' => 'La fecha no esta en el formato correcto.',
             'authored.required' => 'El autor es requerido',
             'authored.exists' => 'No se encontro al autor',
+            // 'authored2.exists' => 'No se encontro al segundo autor',
+            'authored2.different' => 'Seleccione el autor diferente al primero',
             'advisered.required' => 'El asesor es requerido',
             'advisered.exists' => 'No se encontro al asesor',
 
@@ -92,6 +96,7 @@ class CertificateController extends Controller
         $certificate = new Certificate();
         $certificate->title = $request->input('title');
         $certificate->author_id = $request->input('authored');
+        $certificate->second_author_id = $request->input('authored2');
         $certificate->adviser_id = $request->input('advisered');
         $certificate->program = $request->input('program');
         $certificate->faculty = $request->input('faculty');

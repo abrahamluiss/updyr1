@@ -16,15 +16,15 @@
                             </ol>
                         </nav>
                         @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <p>Corrige los siguientes errores:</p>
-                            <ul>
-                                @foreach ($errors->all() as $message)
-                                    <li>{{ $message }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                            <div class="alert alert-danger">
+                                <p>Corrige los siguientes errores:</p>
+                                <ul>
+                                    @foreach ($errors->all() as $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-lg-6 col-5 text-right">
                         <a href="{{ route('certificate.index') }}" class="btn btn-sm btn-neutral">Atras</a>
@@ -56,14 +56,14 @@
                         <div class="form-group">
                             <label for="title">Titulo</label>
                             <input type="text" class="form-control" id="title" aria-describedby="title" name="title"
-                                autocomplete="off" placeholder="Titulo" class="form-control-plaintext" required>
+                                autocomplete="off" placeholder="Titulo" class="form-control-plaintext" value="{{ old('title') }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="author">Autor</label>
                             <input list="author" name="author" id="authore" class="form-control selectpicker"
                                 placeholder="Dni o nombre del autor" autocomplete="off" required>
-                                <input id="authored" type="hidden" name="authored">
+                            <input id="authored" type="hidden" name="authored">
                             <datalist id="author">
                                 @foreach ($authors as $author)
                                     <option value="{{ $author->id }}-{{ $author->full_name }}">
@@ -71,13 +71,30 @@
                                     </option>
                                 @endforeach
                             </datalist>
+                            <div class="custom-control custom-control-alternative custom-checkbox mb-3">
+                                <input class="custom-control-input" id="add_author" type="checkbox" onclick="addAuthor()">
+                                <label class="custom-control-label" for="add_author">Segungo Autor</label>
+                            </div>
+                            <div id="content" style="display: none;">
+                                <label for="author2">2º Autor</label>
+                                <input list="author2" name="author2" id="authore2" class="form-control selectpicker"
+                                    placeholder="Dni o nombre del autor" autocomplete="off">
+                                <input id="authored2" type="hidden" name="authored2">
+                                <datalist id="author2">
+                                    @foreach ($authors as $author)
+                                        <option value="{{ $author->id }}-{{ $author->full_name }}">
+                                            {{ $author->dni }}-{{ $author->full_name }}
+                                        </option>
+                                    @endforeach
+                                </datalist>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="adviser">Asesor</label>
                             <input list="adviser" name="adviser" id="advisere" class="form-control selectpicker"
                                 placeholder="Dni o nombre del asesor" autocomplete="off" required>
-                                <input id="advisered" type="hidden" name="advisered">
+                            <input id="advisered" type="hidden" name="advisered">
                             <datalist id="adviser">
                                 @foreach ($advisers as $adviser)
                                     <option value="{{ $adviser->id }}-{{ $adviser->full_name }}">
@@ -88,52 +105,52 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="program" >Programa</label>
-                                <select class="form-control" name="program" >
-                                    <option value="Bachiller">Bachiller</option>
-                                    <option value="Titulo">Titulo</option>
-                                    <option value="Segunda Especialidad">Segunda Especialidad</option>
-                                    <option value="Complementación Academica">Complementación Academica</option>
-                                    <option value="Maestria">Maestria</option>
-                                    <option value="Doctorado">Doctorado</option>
-                                </select>
+                            <label for="program">Programa</label>
+                            <select class="form-control" name="program">
+                                <option value="Bachiller">Bachiller</option>
+                                <option value="Titulo">Titulo</option>
+                                <option value="Segunda Especialidad">Segunda Especialidad</option>
+                                <option value="Complementación Academica">Complementación Academica</option>
+                                <option value="Maestria">Maestria</option>
+                                <option value="Doctorado">Doctorado</option>
+                            </select>
 
                         </div>
 
                         <div class="form-group">
                             <label for="faculty">Facultad</label>
-                            <input type="text" class="form-control" id="faculty" aria-describedby="faculty"
-                            name="faculty" autocomplete="off" placeholder="Facultad"
-                            class="form-control-plaintext" required>
+                            <input type="text" class="form-control" id="faculty" aria-describedby="faculty" name="faculty"
+                                autocomplete="off" placeholder="Facultad" class="form-control-plaintext" required value="{{ old('faculty') }}">
 
                         </div>
                         <div class="form-group">
                             <label for="originality">Originalidad</label>
-                            <input type="text" class="form-control" id="originality"
-                            aria-describedby="originality" name="originality" autocomplete="off"
-                            placeholder="Originalidad" class="form-control-plaintext" required>
+                            <input type="text" class="form-control" id="originality" aria-describedby="originality"
+                                name="originality" autocomplete="off" placeholder="Originalidad"
+                                class="form-control-plaintext" required value="{{ old('originality') }}">
 
                         </div>
                         <div class="form-group">
                             <label for="similitude">Similitud</label>
-                            <input type="text" class="form-control" id="similitude"
-                            aria-describedby="similitude" name="similitude" autocomplete="off"
-                            placeholder="Similitud" class="form-control-plaintext" required>
+                            <input type="text" class="form-control" id="similitude" aria-describedby="similitude"
+                                name="similitude" autocomplete="off" placeholder="Similitud" class="form-control-plaintext"
+                                required value="{{ old('similitude') }}">
 
                         </div>
                         <div class="form-group">
                             <label for="originality">Fecha</label>
-                            <div class="input-group input-group-alternative" >
+                            <div class="input-group input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input class="form-control datepicker" data-date-format="yyyy-mm-dd" name="date" placeholder="Selecciona" type="text" value="{{ date('Y-m-d') }}" required>
+                                <input class="form-control datepicker" data-date-format="yyyy-mm-dd" name="date"
+                                    placeholder="Selecciona" type="text" value="{{ date('Y-m-d') }}" required>
                             </div>
 
                         </div>
                         <div class="form-group">
                             <label for="observation">Observación</label>
-                            <textarea class="form-control" name="observation" type="text" id="observation"></textarea>
+                            <textarea class="form-control" name="observation" type="text" id="observation">{{ old('observation') }}</textarea>
 
 
                         </div>
@@ -153,20 +170,37 @@
     </div>
 @endsection
 @push('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $("#authore").bind("keyup keydown change", function() {
+            var value = $(this).val();
+            var justId = value.split("-")
+            $('#authored').val(justId[0]);
 
-    $("#authore").bind("keyup keydown change", function(){
-        var value = $(this).val();
-        var justId = value.split("-")
-        $('#authored').val(justId[0]);
+        });
 
-    });
-    $("#advisere").bind("keyup keydown change", function(){
-        var value = $(this).val();
-        var justId = value.split("-")
-        $('#advisered').val(justId[0]);
+        $("#advisere").bind("keyup keydown change", function() {
+            var value3 = $(this).val();
+            var justId3 = value3.split("-")
+            $('#advisered').val(justId3[0]);
 
-    });
-</script>
+        });
+    </script>
+    <script>
+        function addAuthor() {
+            var checkBox = document.getElementById("add_author");
+            var author_sec = document.getElementById("content");
+            if (checkBox.checked == true) {
+                author_sec.style.display = "block";
+                $("#authore2").bind("keyup keydown change", function() {
+                    var value2 = $(this).val();
+                    var justId2 = value2.split("-")
+                    $('#authored2').val(justId2[0]);
+
+                });
+            } else {
+                author_sec.style.display = "none";
+            }
+        }
+    </script>
 @endpush

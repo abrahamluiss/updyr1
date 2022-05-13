@@ -71,6 +71,11 @@
                             <td class="text-center" title="{{ $certificate->authors->full_name }}">
                                 {{ Str::limit( $certificate->authors->full_name, 10, $end = '...') }}
 
+                                @if ($certificate->authorSecond == NULL)
+
+                                @else
+                                <br> y  {{ Str::limit( $certificate->authorSecond->full_name, 10, $end = '...') }}
+                                @endif
                             </td>
                             <td class="text-center" title="{{ $certificate->advisers->full_name }}">
                                 {{ Str::limit( $certificate->advisers->full_name, 10, $end = '...') }}
