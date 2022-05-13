@@ -122,7 +122,7 @@
 
                                     </form>
 
-                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}"  class="btn btn-sm btn-primary" title="Descargar">
+                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}" target="_blank" class="btn btn-sm btn-primary" title="Descargar">
                                         <i class="ni ni-cloud-download-95"></i>
 
                                     </a>

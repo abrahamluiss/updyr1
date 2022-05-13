@@ -90,7 +90,7 @@
     @if ($certificate->authorSecond == NULL)
 
     @else
-    <br> y  <br> {{ Str::limit( $certificate->authorSecond->full_name, 10, $end = '...') }}
+    <br> y  <br> {{$certificate->authorSecond->full_name}}
     @endif
 </label>
 <p id="parrafo2">
