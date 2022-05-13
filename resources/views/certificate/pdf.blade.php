@@ -85,7 +85,14 @@
         <label id="titleh1"><i>CERTIFICADO DE ORIGINALIDAD</i></label>
     </div>
 <p id="p1">Por medio de este documento de Originalidad el área de Repositorio Institucional de la Universidad Nacional de Huancavelica, certifica que el trabajo de investigación titulado: <label id="titleDoc">{{ $certificate->title }}</label></p>.<label></p> <p id="presentado">Presentado por</p>
-<label id="fullName">{{ $certificate->authors->full_name }}</label>
+<label id="fullName" class="text-center">{{ $certificate->authors->full_name }}
+
+    @if ($certificate->authorSecond == NULL)
+
+    @else
+    <br> y  <br> {{ Str::limit( $certificate->authorSecond->full_name, 10, $end = '...') }}
+    @endif
+</label>
 <p id="parrafo2">
     Cuyo docente asesor es: <b id="asesor">{{ $certificate->advisers->full_name }}</b>. Con la finalidad de obtener el grado académico de <b id="asesor">{{ $certificate->program }}</b> en: <b id="asesor">{{ $certificate->faculty }}</b> el Repositorio Institucional hace saber que <b>es un trabajo de investigación original</b> y no ha sido presentado ni publicado en otras revistas científicas nacionales e internacionales ni en sitio o portal electrónico.
 </p>

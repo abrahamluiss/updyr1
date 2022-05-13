@@ -38,18 +38,18 @@
                 <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col">Nº</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">Asesor</th>
-                            <th scope="col">Programa</th>
-                            <th scope="col">Facultad</th>
-                            <th scope="col">Originalidad</th>
-                            <th scope="col">Similitud</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Observación</th>
-                            <th scope="col">OPC</th>
+                            <th class="text-center">Nº</th>
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Autor</th>
+                            <th class="text-center">Asesor</th>
+                            <th class="text-center">Programa</th>
+                            <th class="text-center">Facultad</th>
+                            <th class="text-center">Originalidad</th>
+                            <th class="text-center">Similitud</th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Codigo</th>
+                            <th class="text-center">Observación</th>
+                            <th class="text-center">OPC</th>
 
                         </tr>
                     </thead>
