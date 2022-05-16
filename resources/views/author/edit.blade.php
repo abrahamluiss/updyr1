@@ -15,6 +15,16 @@
                                 <li class="breadcrumb-item active" aria-current="page">Crear</li>
                             </ol>
                         </nav>
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <p>Corrige los siguientes errores:</p>
+                                <ul>
+                                    @foreach ($errors->all() as $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-lg-6 col-5 text-right">
                         <a href="{{ route('adviser.index') }}" class="btn btn-sm btn-neutral">Atras</a>
@@ -39,47 +49,50 @@
 
                 {{-- form --}}
                 <div class="card-body">
-                    <form method="post" action="{{ route('author.store') }}">
-                        @method('POST')
+                    <form method="post" action="{{ route('author.update', $author) }}">
+                        @method('PUT')
                         @csrf
 
                         <div class="form-group">
                             <label for="dni">DNI</label>
                             <input type="text" class="form-control" id="dni" aria-describedby="dni" name="dni"
-                                autocomplete="off" placeholder="DNI" class="form-control-plaintext" required value="{{ old('dni') }}">
+                                autocomplete="off" placeholder="DNI" class="form-control-plaintext" required
+                                value="{{ old('dni', $author->dni) }}">
                         </div>
 
                         <div class="form-group">
                             <label for="fullName">Nombre Completo</label>
                             <input type="text" class="form-control" id="fullName" aria-describedby="fullName"
                                 name="fullName" autocomplete="off" placeholder="Autor" class="form-control-plaintext"
-                                value="{{ old('fullName') }}" required>
+                                value="{{ old('fullName', $author->full_name) }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="n_boucher">Nº Boucher</label>
                             <input type="text" class="form-control" id="n_boucher" aria-describedby="n_boucher"
-                            name="n_boucher" autocomplete="off" placeholder="Nº Boucher"
-                            class="form-control-plaintext" value="{{ old('n_boucher') }}" required>
+                                name="n_boucher" autocomplete="off" placeholder="Nº Boucher" class="form-control-plaintext"
+                                value="{{ old('n_boucher', $author->n_boucher) }}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="amount_paid">Monto Pagado</label>
                             <input type="number" class="form-control" id="amount_paid" aria-describedby="amount_paid"
-                            name="amount_paid" autocomplete="off" placeholder="Monto Pagado"
-                            class="form-control-plaintext"required>
+                                name="amount_paid" autocomplete="off" placeholder="Monto Pagado"
+                                value="{{ old('amount_paid', $author->amount_paid) }}" class="form-control-plaintext"
+                                required>
                         </div>
 
                         <div class="form-group">
-                            <label for="program" >Programa</label>
-                                <select class="form-control" name="program" >
-                                    <option value="Bachiller">Bachiller</option>
-                                    <option value="Titulo">Titulo</option>
-                                    <option value="Segunda Especialidad">Segunda Especialidad</option>
-                                    <option value="Complementación Academica">Complementación Academica</option>
-                                    <option value="Maestria">Maestria</option>
-                                    <option value="Doctorado">Doctorado</option>
-                                </select>
+                            <label for="program">Programa</label>
+                            <select class="form-control" name="program">
+                                <option value="{{ $author->program }}">{{ $author->program }}</option>
+                                <option value="Bachiller">Bachiller</option>
+                                <option value="Titulo">Titulo</option>
+                                <option value="Segunda Especialidad">Segunda Especialidad</option>
+                                <option value="Complementación Academica">Complementación Academica</option>
+                                <option value="Maestria">Maestria</option>
+                                <option value="Doctorado">Doctorado</option>
+                            </select>
 
                         </div>
 
@@ -97,4 +110,3 @@
 
     </div>
 @endsection
-

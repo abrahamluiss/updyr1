@@ -92,9 +92,35 @@ class AuthorController extends Controller
      * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAuthorRequest $request, Author $author)
+    public function update(Request $request, Author $author)
     {
-        //
+         // dd($request->all());
+         $rules =[
+            'dni' => 'required|min:3',
+            'fullName' => 'required|min:3',
+            'n_boucher' => 'required',
+            'amount_paid' => 'required|numeric',
+        ];
+        $messages = [
+            'dni.required' => 'El DNI es obligatorio.',
+            'dni.unique' => 'El DNI ya esta registrado.',
+            'fullName.required' => 'El nombre es requerido.',
+            'n_boucher.required' => 'El Nº de boucher es requerido.',
+            'amount_paid.required' => 'El monto pagado es requerido',
+            'amount_paid.numeric' => 'El monto pagado debe ser un numero',
+        ];
+        $this->validate($request, $rules, $messages);
+        $author = Author::find($author->id);
+
+        $author->dni = $request->input('dni');
+        $author->full_name = $request->input('fullName');
+        $author->n_boucher = $request->input('n_boucher');
+        $author->amount_paid = $request->input('amount_paid');
+        $author->program = $request->input('program');
+        $author->update();
+
+        $notification = 'Author actualizado correctamente';
+        return redirect('author')->with(compact('notification'));
     }
 
     /**

@@ -22,10 +22,10 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Bienvenido!') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    {{-- <a href="{{ route('profile.edit') }}" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
                         <span>{{ __('Mi perfil') }}</span>
-                    </a>
+                    </a> --}}
 
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
@@ -81,11 +81,11 @@
                       <span class="nav-link-text">Asesor</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('profile.edit') }}">
                         <i class="ni ni-circle-08 text-pink"></i> {{ __('Perfil') }}
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
             <!-- Divider -->

@@ -93,7 +93,8 @@ class AdviserController extends Controller
      */
     public function edit(Adviser $adviser)
     {
-        //
+        return view('adviser.edit', compact('adviser'));
+
     }
 
     /**
@@ -103,9 +104,34 @@ class AdviserController extends Controller
      * @param  \App\Models\Adviser  $adviser
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdviserRequest $request, Adviser $adviser)
+    public function update(Request $request, Adviser $adviser)
     {
-        //
+        $rules =[
+            'dni' => 'required|min:3',
+            'fullName' => 'required|min:3',
+            'faculty' => 'required',
+            'email' => 'required|email',
+            'orcid' => 'required',
+        ];
+        $messages = [
+            'dni.required' => 'El DNI es obligatorio.',
+            'fullName.required' => 'El nombre es obligatorio.',
+            'faculty.required' => 'La facultad es requerido.',
+            'email.required' => 'El email es requerido.',
+            'email.required' => 'Ingrese un correo valido.',
+            'orcid.required' => 'El orcid es requerido',
+        ];
+        $this->validate($request, $rules, $messages);
+        $adviser = Adviser::find($adviser->id);
+        $adviser->dni = $request->input('dni');
+        $adviser->full_name = $request->input('fullName');
+        $adviser->faculty = $request->input('faculty');
+        $adviser->email = $request->input('email');
+        $adviser->orcid = $request->input('orcid');
+        $adviser->update();
+
+        $notification = 'Asesor actualizado correctamente';
+        return redirect('adviser')->with(compact('notification'));
     }
 
     /**

@@ -38,6 +38,7 @@
                 <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
+                            <th class="text-center">OPC</th>
                             <th class="text-center">Nº</th>
                             <th class="text-center">Title</th>
                             <th class="text-center">Autor</th>
@@ -49,7 +50,6 @@
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Codigo</th>
                             <th class="text-center">Observación</th>
-                            <th class="text-center">OPC</th>
 
                         </tr>
                     </thead>
@@ -62,8 +62,32 @@
                         @foreach ($certificates as $certificate)
                         <tr>
                             <td class="text-center">
+                                <div class="dropdown">
+                                    <form action="{{ route('certificate.destroy', $certificate) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('certificate.edit', $certificate) }}" class="btn btn-sm btn-primary">Editar</a>
+                                        {{-- <button type="submit" class="btn btn-sm btn-danger">Eliminar</button> --}}
+                                        <input
+                                        type="submit"
+                                        value="Elminar"
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('¿Desea elimiar..?')"
+                                    >
+
+                                    </form>
+
+                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}" target="_blank" class="btn btn-sm btn-primary" title="Descargar">
+                                        <i class="ni ni-cloud-download-95"></i>
+
+                                    </a>
+                                </div>
+
+                            </td>
+                            <td class="text-center">
                                 {{ $i++ }}
                             </td>
+
                             <td class="text-center" title="{{ $certificate->title }}">
                                 {{ Str::limit( $certificate->title, 10, $end = '...') }}
 
@@ -105,29 +129,6 @@
                                 @else
                                 {{ $certificate->observation }}
                                @endif
-                            </td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <form action="{{ route('certificate.destroy', $certificate) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="{{ route('certificate.edit', $certificate) }}" class="btn btn-sm btn-primary">Editar</a>
-                                        {{-- <button type="submit" class="btn btn-sm btn-danger">Eliminar</button> --}}
-                                        <input
-                                        type="submit"
-                                        value="Elminar"
-                                        class="btn btn-sm btn-danger"
-                                        onclick="return confirm('¿Desea elimiar..?')"
-                                    >
-
-                                    </form>
-
-                                    <a href="{{ route('certificate.report', ['download' => 'pdf','certificate' => $certificate]) }}" target="_blank" class="btn btn-sm btn-primary" title="Descargar">
-                                        <i class="ni ni-cloud-download-95"></i>
-
-                                    </a>
-                                </div>
-
                             </td>
 
                         </tr>
