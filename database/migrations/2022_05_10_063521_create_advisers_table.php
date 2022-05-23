@@ -18,9 +18,9 @@ class CreateAdvisersTable extends Migration
 
             $table->string('dni');
             $table->string('full_name');
-            $table->string('faculty');
-            $table->string('email');
-            $table->string('orcid');
+            $table->string('faculty')->nullable();
+            $table->string('email')->nullable();
+            $table->string('orcid')->nullable();
 
             $table->timestamps();
         });

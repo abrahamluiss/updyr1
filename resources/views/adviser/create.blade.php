@@ -60,21 +60,21 @@
                             <label for="faculty">Facultad</label>
                             <input type="text" class="form-control" id="faculty" aria-describedby="faculty"
                             name="faculty" autocomplete="off" placeholder="Facultad"
-                            class="form-control-plaintext" value="{{ old('faculty') }}" required>
+                            class="form-control-plaintext" value="{{ old('faculty') }}" >
                         </div>
 
                         <div class="form-group">
                             <label for="email">Correo</label>
                             <input type="email" class="form-control" id="email" aria-describedby="email"
                             name="email" autocomplete="off" placeholder="Correo"
-                            class="form-control-plaintext" value="{{ old('email') }}" required>
+                            class="form-control-plaintext" value="{{ old('email') }}" >
                         </div>
 
                         <div class="form-group">
                             <label for="orcid">ORCID</label>
                             <input type="orcid" class="form-control" id="orcid" aria-describedby="orcid"
                             name="orcid" autocomplete="off" placeholder="ORCID"
-                            class="form-control-plaintext" value="{{ old('orcid') }}" required>
+                            class="form-control-plaintext" value="{{ old('orcid') }}" >
                         </div>
 
                         <button type="submit" class="btn btn-primary">Guardar</button>
