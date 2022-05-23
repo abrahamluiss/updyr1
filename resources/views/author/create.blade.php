@@ -65,7 +65,7 @@
 
                         <div class="form-group">
                             <label for="amount_paid">Monto Pagado</label>
-                            <input type="number" class="form-control" id="amount_paid" aria-describedby="amount_paid"
+                            <input type="text" class="form-control" id="amount_paid" aria-describedby="amount_paid"
                             name="amount_paid" autocomplete="off" placeholder="Monto Pagado"
                             class="form-control-plaintext"required>
                         </div>
@@ -97,4 +97,29 @@
 
     </div>
 @endsection
+@push('js')
+<script>
+$('#amount_paid').keypress(function (tecla) {
 
+    if ((tecla.charCode < 48 || tecla.charCode > 57) && (tecla.charCode != 46) && (tecla.charCode != 8)) {
+        return false;
+    }else {
+             var len   = $('#amount_paid').val().length;
+             var index = $('#amount_paid').val().indexOf('.');
+
+             if (index > 0 && tecla.charCode == 46) {
+                 return false;
+             }
+
+             if (index > 0) {
+                 var CharAfterdot = (len + 1) - index;
+                 if (CharAfterdot > 3) {
+                     return false;
+                 }
+             }
+    }
+
+    return true;
+});
+</script>
+@endpush

@@ -84,7 +84,7 @@
     <div id="title">
         <label id="titleh1"><i>CERTIFICADO DE ORIGINALIDAD</i></label>
     </div>
-<p id="p1">Por medio de este documento de Originalidad el área de Repositorio Institucional de la Universidad Nacional de Huancavelica, certifica que el trabajo de investigación titulado: <label id="titleDoc">{{ $certificate->title }}</label></p>.<label></p> <p id="presentado">Presentado por</p>
+<p id="p1" class="text-justify">Por medio de este documento de Originalidad el área de Repositorio Institucional de la Universidad Nacional de Huancavelica, certifica que el trabajo de investigación titulado: <label id="titleDoc">{{ $certificate->title }}</label></p>.<label></p> <p id="presentado">Presentado por</p>
 <label id="fullName" class="text-center">{{ $certificate->authors->full_name }}
 
     @if ($certificate->authorSecond == NULL)
@@ -93,10 +93,10 @@
     <br> y  <br> {{$certificate->authorSecond->full_name}}
     @endif
 </label>
-<p id="parrafo2">
+<p id="parrafo2" class="text-justify">
     Cuyo docente asesor es: <b id="asesor">{{ $certificate->advisers->full_name }}</b>. Con la finalidad de obtener el grado académico de <b id="asesor">{{ $certificate->program }}</b> en: <b id="asesor">{{ $certificate->faculty }}</b> el Repositorio Institucional hace saber que <b>es un trabajo de investigación original</b> y no ha sido presentado ni publicado en otras revistas científicas nacionales e internacionales ni en sitio o portal electrónico.
 </p>
-<p id="parrafo2">
+<p id="parrafo2" class="text-justify">
     Por tanto, basándonos en el cumplimiento del Art.4 del Reglamento del Software Anti plagio de la UNH, el área de Repositorio Institucional de la Universidad Nacional de Huancavelica dictamina que este trabajo de investigación fue analizado por el software anti plagio TURNITIN y al estar dentro de los parámetros establecidos, esta investigación es aceptado como <b id="titleDoc">original</b>.
 </p>
 <table id="table">

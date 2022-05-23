@@ -11,7 +11,7 @@
                                 <li class="breadcrumb-item"><a href="/home"><i class="fas fa-home"></i></a></li>
                                 {{-- <li class="breadcrumb-item"><a href="#">Pac</a></li> --}}
                                 <li class="breadcrumb-item active" aria-current="page"><a
-                                        href="{{ route('adviser.index') }}">Autores</a></li>
+                                        href="{{ route('adviser.index') }}">Asesores</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Crear</li>
                             </ol>
                         </nav>

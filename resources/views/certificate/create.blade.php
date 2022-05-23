@@ -56,7 +56,8 @@
                         <div class="form-group">
                             <label for="title">Titulo</label>
                             <input type="text" class="form-control" id="title" aria-describedby="title" name="title"
-                                autocomplete="off" placeholder="Titulo" class="form-control-plaintext" value="{{ old('title') }}" required>
+                                autocomplete="off" placeholder="Titulo" class="form-control-plaintext"
+                                value="{{ old('title') }}" required>
                         </div>
 
                         <div class="form-group">
@@ -120,21 +121,23 @@
                         <div class="form-group">
                             <label for="faculty">Facultad</label>
                             <input type="text" class="form-control" id="faculty" aria-describedby="faculty" name="faculty"
-                                autocomplete="off" placeholder="Facultad" class="form-control-plaintext" required value="{{ old('faculty') }}">
+                                autocomplete="off" placeholder="Facultad" class="form-control-plaintext" required
+                                value="{{ old('faculty') }}">
 
                         </div>
                         <div class="form-group">
                             <label for="originality">Originalidad</label>
-                            <input type="text" class="form-control" id="originality" aria-describedby="originality"
-                                name="originality" autocomplete="off" placeholder="Originalidad"
-                                class="form-control-plaintext" required value="{{ old('originality') }}">
+                            <input type="number" min="0" max="100" class="form-control" id="originality"
+                                aria-describedby="originality" name="originality" autocomplete="off"
+                                placeholder="Originalidad" class="form-control-plaintext" required
+                                value="{{ old('originality', 100) }}" onclick="porcentaje()">
 
                         </div>
                         <div class="form-group">
                             <label for="similitude">Similitud</label>
-                            <input type="text" class="form-control" id="similitude" aria-describedby="similitude"
+                            <input type="number" min="0" max="100" class="form-control" id="similitude" aria-describedby="similitude"
                                 name="similitude" autocomplete="off" placeholder="Similitud" class="form-control-plaintext"
-                                required value="{{ old('similitude') }}">
+                                required value="{{ old('similitude',0) }}" onclick="porcentaje()">
 
                         </div>
                         <div class="form-group">
@@ -201,6 +204,21 @@
             } else {
                 author_sec.style.display = "none";
             }
+        }
+    </script>
+    <script>
+        function porcentaje() {
+            var originality = document.getElementById("originality").value;
+            // var similitude = document.getElementById("similitude").value;
+            var cien = 100;
+            try {
+                totalP = cien - (originality);
+                if (totalP < 0) {
+                    similitude.value = "0";
+                } else {
+                    document.getElementById("similitude").value = totalP;
+                }
+            }catch (e) {}
         }
     </script>
 @endpush
