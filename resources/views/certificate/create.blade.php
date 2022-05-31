@@ -127,7 +127,7 @@
                         </div>
                         <div class="form-group">
                             <label for="originality">Originalidad</label>
-                            <input type="number" min="0" max="100" class="form-control" id="originality"
+                            <input type="number"  step="0.01" class="form-control" id="originality"
                                 aria-describedby="originality" name="originality" autocomplete="off"
                                 placeholder="Originalidad" class="form-control-plaintext" required
                                 value="{{ old('originality', 100) }}" onclick="porcentaje()">
@@ -135,7 +135,7 @@
                         </div>
                         <div class="form-group">
                             <label for="similitude">Similitud</label>
-                            <input type="number" min="0" max="100" class="form-control" id="similitude" aria-describedby="similitude"
+                            <input type="number" step="0.01" class="form-control" id="similitude" aria-describedby="similitude"
                                 name="similitude" autocomplete="off" placeholder="Similitud" class="form-control-plaintext"
                                 required value="{{ old('similitude',0) }}" onclick="porcentaje()">
 
