@@ -12,7 +12,7 @@
 <body>
     <header class="header text-center">
         <h1>Autores Registrados</h1>
-        <span>Monto Total: {{ $total }}</span>
+        <span>Monto Total: S/. {{ $total }}</span>
     </header>
     <table class="table table-bordered text-center">
         <thead>
@@ -59,7 +59,7 @@
                             {{ $author->n_boucher }}
                         </td>
                         <td class="text-center">
-                            {{ $author->amount_paid }}
+                            S/. {{ $author->amount_paid }}
                         </td>
                         <td class="text-center">
                             {{ $author->program }}
