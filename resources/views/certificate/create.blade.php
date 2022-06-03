@@ -126,20 +126,21 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="originality">Originalidad</label>
-                            <input type="number"  step="0.01" class="form-control" id="originality"
-                                aria-describedby="originality" name="originality" autocomplete="off"
-                                placeholder="Originalidad" class="form-control-plaintext" required
-                                value="{{ old('originality', 100) }}" onclick="porcentaje()">
-
-                        </div>
-                        <div class="form-group">
                             <label for="similitude">Similitud</label>
                             <input type="number" step="0.01" class="form-control" id="similitude" aria-describedby="similitude"
                                 name="similitude" autocomplete="off" placeholder="Similitud" class="form-control-plaintext"
                                 required value="{{ old('similitude',0) }}" onclick="porcentaje()">
 
                         </div>
+                        <div class="form-group">
+                            <label for="originality">Originalidad</label>
+                            <input type="number"  step="0.01" class="form-control" id="originality"
+                                aria-describedby="originality" name="originality" autocomplete="off"
+                                placeholder="Originalidad" class="form-control-plaintext" required
+                                value="{{ old('originality', 100) }}" onclick="porcentaje()" readonly>
+
+                        </div>
+
                         <div class="form-group">
                             <label for="originality">Fecha</label>
                             <div class="input-group input-group-alternative">
@@ -208,15 +209,15 @@
     </script>
     <script>
         function porcentaje() {
-            var originality = document.getElementById("originality").value;
-            // var similitude = document.getElementById("similitude").value;
+            // var originality = document.getElementById("originality").value;
+             var similitude = document.getElementById("similitude").value;
             var cien = 100;
             try {
-                totalP = cien - (originality);
+                totalP = cien - (similitude);
                 if (totalP < 0) {
-                    similitude.value = "0";
+                    originality.value = "0";
                 } else {
-                    document.getElementById("similitude").value = totalP;
+                    document.getElementById("originality").value = totalP;
                 }
             }catch (e) {}
         }
